@@ -69,13 +69,13 @@ object GroupByTest {
       var arr1 = new Array[(Int, Array[Byte])](numKVPairs)
       for (i <- 0 until numKVPairs) {
         val byteArr = new Array[Byte](valSize)
-        ranGen.nextBytes(byteArr)
+        ranGen.nextBytes(byteArr)                       //不产生任何值，但改变byteArr为一个随机字节数组
         arr1(i) = (ranGen.nextInt(Int.MaxValue), byteArr)
       }
       arr1
     }.cache
-    // Enforce that everything has been calculated and in cache
-    pairs1.count
+    // Enforce that everything has been calculated and in cache    ？？？有疑问，假如只需要打印下面的内容，这句话对此有帮助吗？ 
+    pairs1.count   
 
     println(pairs1.groupByKey(numReducers).count)
 
